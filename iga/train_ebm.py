@@ -63,6 +63,8 @@ if __name__ == '__main__':
     parser.add_argument('--num_samples', type=int, default=500000)
     parser.add_argument('--log_images', type=bool, default=False)
     parser.add_argument('--model_path', type=str, default=None)
+    parser.add_argument('--batch_size', type=int, default=1)
+    parser.add_argument('--use_wandb', type=bool, default=False)
 
     reprocess = parser.parse_args().reprocess
     run_name = parser.parse_args().run_name
@@ -73,6 +75,8 @@ if __name__ == '__main__':
     log_images = parser.parse_args().log_images
     mode = parser.parse_args().mode
     model_path = parser.parse_args().model_path
+    batch_size = parser.parse_args().batch_size
+    use_wandb = parser.parse_args().use_wandb
     ################################################################################
     if mode == 'rot':
         config = ebm_rot_config
@@ -90,6 +94,7 @@ if __name__ == '__main__':
 
     run_name = f"{run_name}_{mode}"
     print(f'Run name: {run_name}')
+    config['batch_size'] = batch_size
     config['mode'] = mode
     config['record'] = record
     config['log_images'] = log_images
@@ -122,9 +127,9 @@ if __name__ == '__main__':
                    + [f'centres_b_{i}' for i in range(config['context_length'])]
 
     train_dataloader = DataLoader(dset_train, batch_size=config['batch_size'], shuffle=True, num_workers=4,
-                                  follow_batch=follow_batch, pin_memory=True)
+                                  follow_batch=follow_batch, pin_memory=False)
     val_dataloader = DataLoader(dset_val, batch_size=config['batch_size_val'], shuffle=False, num_workers=4,
-                                follow_batch=follow_batch, pin_memory=True)
+                                follow_batch=follow_batch, pin_memory=False)
     ################################################################################
     print(f'Num training samples: {len(dset_train)}')
     print(f'Num validation samples: {len(dset_val)}')
@@ -134,15 +139,19 @@ if __name__ == '__main__':
     if record:
         if f'./runs/{run_name}' is not None:
             os.makedirs(f'./runs/{run_name}/checkpoints', exist_ok=True)
-        logger = WandbLogger(project='IGA',
-                             name=run_name,
-                             save_dir=f'./runs/{run_name}',
-                             log_model=False,
-                             config=config)
-        # We same models manually, so don't need to log them.
-        callbacks = [
-            LearningRateMonitor(logging_interval='step')
-        ]
+        if use_wandb:
+            logger = WandbLogger(project='IGA',
+                                 name=run_name,
+                                 save_dir=f'./runs/{run_name}',
+                                 log_model=False,
+                                 config=config)
+            # We same models manually, so don't need to log them.
+            callbacks = [
+                LearningRateMonitor(logging_interval='step')
+            ]
+        else:
+            logger = False
+            callbacks = []
 
         # Save config to wandb if the file doesn't already exist.
         if not os.path.exists(f"./runs/{run_name}/checkpoints/config.json"):

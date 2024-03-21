@@ -3,6 +3,11 @@
 Code for paper: "Few-Shot In-Context Imitation Learning via Implicit Graph Alignment" (2023).
 [Project Webpage](https://www.robot-learning.uk/implicit-graph-alignment), [Paper](https://arxiv.org/pdf/2310.12238.pdf)
 
+<p align="center">
+<img src="./media/overview.gif" alt="drawing" width="600"/>
+<img src="./media/graph_optim.gif" alt="drawing" width="490.5"/>
+</p>
+
 ## Setup
 
 **Clone this repo**
