@@ -32,6 +32,8 @@ pip install -e .
 
 ## Quick Demo
 
+We provide a quick demonstration of the optimisation procedure of alignments between different objects. Demo data contains point clouds from simulation and ones captured in the real world. By running the demo, you will see the initial "random" alignments between the two objects, the optimisation procedure based on the provided demonstrations (context), and the produced alignment between the objects. During real-world deployment, these point clouds would be captured using depth cameras.
+
 **Download pre-trained weights and demo data**
 
 ```
