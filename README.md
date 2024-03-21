@@ -4,8 +4,13 @@ Code for paper: "Few-Shot In-Context Imitation Learning via Implicit Graph Align
 [Project Webpage](https://www.robot-learning.uk/implicit-graph-alignment), [Paper](https://arxiv.org/pdf/2310.12238.pdf)
 
 <p align="center">
-<img src="./media/overview.gif" alt="drawing" width="600"/>
-<img src="./media/graph_optim.gif" alt="drawing" width="490.5"/>
+<img src="./media/overview.gif" alt="drawing" width="700"/>
+</p>
+
+Implicit Graph Alignment (IGA) is a method for few-shot in-context imitation learning that aligns the objects in a way that is consistent with provided demonstrations (context) by optimising over their alignments in the graph space.
+
+<p align="center">
+<img src="./media/graph_optim.gif" alt="drawing" width="600"/>
 </p>
 
 ## Setup
