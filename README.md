@@ -1,6 +1,6 @@
 # Implicit Graph Alignment (IGA)
 
-Code for paper: "Few-Shot In-Context Imitation Learning via Implicit Graph Alignment" (2023).
+Code for the paper: "Few-Shot In-Context Imitation Learning via Implicit Graph Alignment" (Published at CoRL 2023).
 [Project Webpage](https://www.robot-learning.uk/implicit-graph-alignment), [Paper](https://arxiv.org/pdf/2310.12238.pdf)
 
 <p align="center">
@@ -69,7 +69,7 @@ sample = {
 }
 ```
 
-First point cloud in `pcds_a` (and `pcds_b`) is used as the live point cloud, the rest are used for the context. 
+The first point cloud in `pcds_a` (and `pcds_b`) is used as the live point cloud, the rest are used for the context. 
 
 The models are trained on **complete point clouds expressed in the robot's end-effector frame -- objects are grasped in a similar way**. 
 Please ensure that the point clouds are in the same format.
@@ -88,7 +88,7 @@ or fine-tune the models.
 
 ## Training / Fine-Tuning
 
-If you want to train the models from scratch or fine-tune it, you can use the `train.py` script.
+If you want to train the models from scratch or fine-tune them, you can use the `train.py` script.
 E.g. to fine-tune the rotation model on the demo data, run:
 
 ```
@@ -112,10 +112,11 @@ Training parameters are defined in `/configs/ebm_rot.py` and `/configs/ebm_trans
 If you find our paper interesting or this code useful in your work, please cite our paper:
 
 ```
-@article{vosylius2023few,
-  title={Few-shot in-context imitation learning via implicit graph alignment},
-  author={Vosylius, Vitalis and Johns, Edward},
-  journal={arXiv preprint arXiv:2310.12238},
-  year={2023}
+
+@inproceedings{vosylius2023few,
+title={Few-Shot In-Context Imitation Learning via Implicit Graph Alignment},
+author={Vosylius, Vitalis and Johns, Edward},
+booktitle={Conference on Robot Learning},
+year={2023}
 }
 ```
